@@ -1,0 +1,13 @@
+version: "3"
+services:
+  flask_hack:
+    container_name: catalog_simple  
+    build: .
+      
+    command: gunicorn -w 2 -b 0.0.0.0:5016 --timeout 600 web_catalog_simple:app --reload
+    environment:
+        - FLASK_APP=web_catalog_simple.py
+        - FLASK_DEBUG=1
+        - PYTHONUNBUFFERED=TRUE
+    ports:
+        - '5016:5016'
